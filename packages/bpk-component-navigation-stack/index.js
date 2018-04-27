@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+/* @flow */
+
 import BpkNavigationStack from './src/BpkNavigationStack';
 
 export default BpkNavigationStack;

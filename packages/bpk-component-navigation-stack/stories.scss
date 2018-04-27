@@ -16,39 +16,29 @@
  * limitations under the License.
  */
 
-@import '~bpk-mixins/index';
+@import '~bpk-mixins';
 
-.bpk-navigation-stack {
-  position: relative;
-  overflow: hidden;
+.bpk-navigation-stack-wrapper {
+  max-width: $bpk-spacing-xxl * 8;
+  min-height: $bpk-spacing-xxl * 12;
 
-  &__view {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    transition: transform $bpk-duration-sm ease;
+  @include bpk-border-sm($bpk-color-gray-100, '');
+}
 
-    @include bpk-box-shadow-xl;
+.bpk-navigation-stack-view {
+  display: flex;
+  padding: $bpk-spacing-xl;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  background-color: $bpk-color-white;
 
-    &--enter {
-      transform: translateX(110%);
-    }
+  > * {
+    margin-top: $bpk-spacing-base;
 
-    &--enter-active,
-    &--enter-done {
-      transform: translateX(0);
-    }
-
-    &--exit {
-      transform: translateX(0);
-    }
-
-    &--exit-active,
-    &--exit-done {
-      transform: translateX(110%);
+    &:first-child {
+      margin-top: unset;
+      margin-bottom: auto;
     }
   }
 }

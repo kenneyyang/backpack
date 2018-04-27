@@ -16,11 +16,68 @@
  * limitations under the License.
  */
 
+/* @flow */
+
 import React from 'react';
+import BpkText from 'bpk-component-text';
+import BpkButton from 'bpk-component-button';
+import { cssModules } from 'bpk-react-utils';
 import { storiesOf } from '@storybook/react';
 
 import BpkNavigationStack from './index';
+import STYLES from './stories.scss';
+
+const getClassName = cssModules(STYLES);
+
+const View = ({
+  index,
+  navigationController,
+  className,
+  ...rest
+}: {
+  index: number,
+  navigationController: ?BpkNavigationStack,
+  className: ?string,
+}) => (
+  <section
+    className={[getClassName('bpk-navigation-stack-view'), className].join(' ')}
+    {...rest}
+  >
+    <BpkText
+      tagName="h1"
+      textStyle="lg"
+      className={getClassName('bpk-navigation-stack-view__title')}
+    >
+      View {index}
+    </BpkText>
+    <BpkButton
+      onClick={() =>
+        navigationController &&
+        navigationController.pushView(<View index={index + 1} />)
+      }
+    >
+      Add view
+    </BpkButton>
+    {index > 1 && (
+      <BpkButton
+        destructive
+        onClick={() => navigationController && navigationController.popView()}
+      >
+        Remove view
+      </BpkButton>
+    )}
+  </section>
+);
+
+View.defaultProps = {
+  index: 1,
+  navigationController: null,
+  className: null,
+};
 
 storiesOf('bpk-component-navigation-stack', module).add('Default', () => (
-  <BpkNavigationStack />
+  <BpkNavigationStack
+    className={getClassName('bpk-navigation-stack-wrapper')}
+    initialViews={[<View />]}
+  />
 ));

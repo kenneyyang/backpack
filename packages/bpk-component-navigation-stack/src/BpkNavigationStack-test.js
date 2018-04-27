@@ -16,13 +16,17 @@
  * limitations under the License.
  */
 
+/* @flow */
+
 import React from 'react';
 import renderer from 'react-test-renderer';
 import BpkNavigationStack from './BpkNavigationStack';
 
 describe('BpkNavigationStack', () => {
   it('should render correctly', () => {
-    const tree = renderer.create(<BpkNavigationStack />).toJSON();
+    const tree = renderer
+      .create(<BpkNavigationStack initialViews={[<div />]} />)
+      .toJSON();
 
     expect(tree).toMatchSnapshot();
   });

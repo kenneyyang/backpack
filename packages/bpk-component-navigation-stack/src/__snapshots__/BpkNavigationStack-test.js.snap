@@ -1,0 +1,269 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BpkNavigationStack should render correctly 1`] = `
+<div
+  className="bpk-navigation-stack"
+>
+  <div
+    className="bpk-navigation-stack__view"
+  >
+    <div
+      navigationController={
+        BpkNavigationStack {
+          "_reactInternalInstance": ReactCompositeComponentWrapper {
+            "_calledComponentWillUnmount": false,
+            "_compositeType": 0,
+            "_context": Object {},
+            "_currentElement": <BpkNavigationStack
+              className={null}
+              initialViews={
+                Array [
+                  <div />,
+                ]
+              }
+            />,
+            "_debugID": 1,
+            "_hostContainerInfo": Object {
+              "createNodeMock": [Function],
+            },
+            "_hostParent": null,
+            "_instance": [Circular],
+            "_mountImage": null,
+            "_mountIndex": 0,
+            "_mountOrder": 2,
+            "_pendingCallbacks": null,
+            "_pendingElement": null,
+            "_pendingForceUpdate": false,
+            "_pendingReplaceState": false,
+            "_pendingStateQueue": null,
+            "_renderedComponent": ReactCompositeComponentWrapper {
+              "_calledComponentWillUnmount": false,
+              "_compositeType": 0,
+              "_context": Object {},
+              "_currentElement": <TransitionGroup
+                childFactory={[Function]}
+                className="bpk-navigation-stack"
+                component="div"
+              >
+                <CSSTransition
+                  classNames={
+                    Object {
+                      "enter": "bpk-navigation-stack__view--enter",
+                      "enterActive": "bpk-navigation-stack__view--enter-active",
+                      "enterDone": "bpk-navigation-stack__view--enter-done",
+                      "exit": "bpk-navigation-stack__view--exit",
+                      "exitActive": "bpk-navigation-stack__view--exit-active",
+                      "exitDone": "bpk-navigation-stack__view--exit-done",
+                    }
+                  }
+                  timeout={500}
+                >
+                  <div
+                    className="bpk-navigation-stack__view"
+                  >
+                    <div
+                      navigationController={[Circular]}
+                    />
+                  </div>
+                </CSSTransition>
+              </TransitionGroup>,
+              "_debugID": 2,
+              "_hostContainerInfo": Object {
+                "createNodeMock": [Function],
+              },
+              "_hostParent": null,
+              "_instance": TransitionGroup {
+                "_reactInternalInstance": [Circular],
+                "appeared": true,
+                "context": Object {},
+                "props": Object {
+                  "childFactory": [Function],
+                  "children": Array [
+                    <CSSTransition
+                      classNames={
+                        Object {
+                          "enter": "bpk-navigation-stack__view--enter",
+                          "enterActive": "bpk-navigation-stack__view--enter-active",
+                          "enterDone": "bpk-navigation-stack__view--enter-done",
+                          "exit": "bpk-navigation-stack__view--exit",
+                          "exitActive": "bpk-navigation-stack__view--exit-active",
+                          "exitDone": "bpk-navigation-stack__view--exit-done",
+                        }
+                      }
+                      timeout={500}
+                    >
+                      <div
+                        className="bpk-navigation-stack__view"
+                      >
+                        <div
+                          navigationController={[Circular]}
+                        />
+                      </div>
+                    </CSSTransition>,
+                  ],
+                  "className": "bpk-navigation-stack",
+                  "component": "div",
+                },
+                "refs": Object {},
+                "state": Object {
+                  "children": Object {
+                    ".$.0": <CSSTransition
+                      appear={undefined}
+                      classNames={
+                        Object {
+                          "enter": "bpk-navigation-stack__view--enter",
+                          "enterActive": "bpk-navigation-stack__view--enter-active",
+                          "enterDone": "bpk-navigation-stack__view--enter-done",
+                          "exit": "bpk-navigation-stack__view--exit",
+                          "exitActive": "bpk-navigation-stack__view--exit-active",
+                          "exitDone": "bpk-navigation-stack__view--exit-done",
+                        }
+                      }
+                      enter={undefined}
+                      exit={undefined}
+                      in={true}
+                      onExited={[Function]}
+                      timeout={500}
+                    >
+                      <div
+                        className="bpk-navigation-stack__view"
+                      >
+                        <div
+                          navigationController={[Circular]}
+                        />
+                      </div>
+                    </CSSTransition>,
+                  },
+                },
+                "updater": Object {
+                  "enqueueCallback": [Function],
+                  "enqueueCallbackInternal": [Function],
+                  "enqueueElementInternal": [Function],
+                  "enqueueForceUpdate": [Function],
+                  "enqueueReplaceState": [Function],
+                  "enqueueSetState": [Function],
+                  "isMounted": [Function],
+                  "validateCallback": [Function],
+                },
+              },
+              "_mountImage": null,
+              "_mountIndex": 0,
+              "_mountOrder": 3,
+              "_pendingCallbacks": null,
+              "_pendingElement": null,
+              "_pendingForceUpdate": false,
+              "_pendingReplaceState": false,
+              "_pendingStateQueue": null,
+              "_renderedComponent": <div
+                className="bpk-navigation-stack"
+              >
+                <div
+                  className="bpk-navigation-stack__view"
+                >
+                  <div
+                    navigationController={[Circular]}
+                  />
+                </div>
+              </div>,
+              "_renderedNodeType": 0,
+              "_rootNodeID": 0,
+              "_topLevelWrapper": null,
+              "_updateBatchNumber": null,
+              "_warnedAboutRefsInRender": false,
+            },
+            "_renderedNodeType": 1,
+            "_rootNodeID": 0,
+            "_topLevelWrapper": ReactCompositeComponentWrapper {
+              "_calledComponentWillUnmount": false,
+              "_compositeType": 0,
+              "_context": Object {},
+              "_currentElement": <TopLevelWrapper
+                child={
+                  <BpkNavigationStack
+                    className={null}
+                    initialViews={
+                      Array [
+                        <div />,
+                      ]
+                    }
+                  />
+                }
+              />,
+              "_debugID": 0,
+              "_hostContainerInfo": Object {
+                "createNodeMock": [Function],
+              },
+              "_hostParent": null,
+              "_instance": TopLevelWrapper {
+                "_reactInternalInstance": [Circular],
+                "context": Object {},
+                "props": Object {
+                  "child": <BpkNavigationStack
+                    className={null}
+                    initialViews={
+                      Array [
+                        <div />,
+                      ]
+                    }
+                  />,
+                },
+                "refs": Object {},
+                "state": null,
+                "updater": Object {
+                  "enqueueCallback": [Function],
+                  "enqueueCallbackInternal": [Function],
+                  "enqueueElementInternal": [Function],
+                  "enqueueForceUpdate": [Function],
+                  "enqueueReplaceState": [Function],
+                  "enqueueSetState": [Function],
+                  "isMounted": [Function],
+                  "validateCallback": [Function],
+                },
+              },
+              "_mountImage": null,
+              "_mountIndex": 0,
+              "_mountOrder": 1,
+              "_pendingCallbacks": null,
+              "_pendingElement": null,
+              "_pendingForceUpdate": false,
+              "_pendingReplaceState": false,
+              "_pendingStateQueue": null,
+              "_renderedComponent": [Circular],
+              "_renderedNodeType": 1,
+              "_rootNodeID": 0,
+              "_topLevelWrapper": null,
+              "_updateBatchNumber": null,
+              "_warnedAboutRefsInRender": false,
+            },
+            "_updateBatchNumber": null,
+            "_warnedAboutRefsInRender": false,
+          },
+          "context": Object {},
+          "props": Object {
+            "className": null,
+            "initialViews": Array [
+              <div />,
+            ],
+          },
+          "refs": Object {},
+          "state": Object {
+            "views": Array [
+              <div />,
+            ],
+          },
+          "updater": Object {
+            "enqueueCallback": [Function],
+            "enqueueCallbackInternal": [Function],
+            "enqueueElementInternal": [Function],
+            "enqueueForceUpdate": [Function],
+            "enqueueReplaceState": [Function],
+            "enqueueSetState": [Function],
+            "isMounted": [Function],
+            "validateCallback": [Function],
+          },
+        }
+      }
+    />
+  </div>
+</div>
+`;

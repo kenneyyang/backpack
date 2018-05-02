@@ -26,19 +26,10 @@
 }
 
 .bpk-navigation-stack-view {
-  display: flex;
-  padding: $bpk-spacing-xl;
-  flex-direction: column;
-  align-items: center;
   flex: 1;
-  background-color: $bpk-color-white;
+  background-color: $bpk-color-gray-100;
 
-  > * {
-    margin-top: $bpk-spacing-base;
-
-    &:first-child {
-      margin-top: unset;
-      margin-bottom: auto;
-    }
+  &--alternate {
+    background-color: $bpk-color-gray-50;
   }
 }

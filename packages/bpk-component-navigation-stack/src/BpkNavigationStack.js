@@ -19,9 +19,11 @@
 /* @flow */
 
 import { cssModules } from 'bpk-react-utils';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { durationSm } from 'bpk-tokens/tokens/base.es6';
+import { TransitionGroup, Transition } from 'react-transition-group';
 import React, { Component, cloneElement, Children, type Element } from 'react';
 
+import { isRTL } from './utils';
 import STYLES from './BpkNavigationStack.scss';
 
 const getClassName = cssModules(STYLES);
@@ -71,32 +73,38 @@ class BpkNavigationStack extends Component<Props, State> {
   }
 
   render() {
-    const { initialViews, className, ...rest } = this.props;
-    const classNames = [getClassName('bpk-navigation-stack')];
+    const {
+      initialViews, // unused
+      className,
+      ...rest
+    } = this.props;
 
-    if (className) {
-      classNames.push(className);
-    }
-
-    const viewClassNames = {
-      enter: getClassName('bpk-navigation-stack__view--enter'),
-      enterActive: getClassName('bpk-navigation-stack__view--enter-active'),
-      enterDone: getClassName('bpk-navigation-stack__view--enter-done'),
-      exit: getClassName('bpk-navigation-stack__view--exit'),
-      exitActive: getClassName('bpk-navigation-stack__view--exit-active'),
-      exitDone: getClassName('bpk-navigation-stack__view--exit-done'),
-    };
+    const lastViewIndex = this.state.views.length - 1;
 
     return (
-      <TransitionGroup className={classNames.join(' ')} {...rest}>
-        {Children.map(this.state.views, view => (
-          <CSSTransition timeout={500} classNames={viewClassNames}>
-            <div className={getClassName('bpk-navigation-stack__view')}>
-              {cloneElement(view, { navigationController: this })}
-            </div>
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
+      <div
+        className={getClassName('bpk-navigation-stack', className && className)}
+        {...rest}
+      >
+        <TransitionGroup
+          className={getClassName('bpk-navigation-stack__view-track')}
+          style={{
+            transform: `translateX(${
+              lastViewIndex === 0
+                ? '0%'
+                : `${isRTL() ? '' : '-'}${lastViewIndex}00%`
+            })`,
+          }}
+        >
+          {Children.map(this.state.views, view => (
+            <Transition timeout={parseInt(durationSm, 10)}>
+              <div className={getClassName('bpk-navigation-stack__view')}>
+                {cloneElement(view, { navigationController: this })}
+              </div>
+            </Transition>
+          ))}
+        </TransitionGroup>
+      </div>
     );
   }
 }

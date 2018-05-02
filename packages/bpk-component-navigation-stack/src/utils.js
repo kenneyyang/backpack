@@ -16,20 +16,19 @@
  * limitations under the License.
  */
 
-@import '~bpk-mixins/index';
+/* @flow */
 
-.bpk-navigation-stack {
-  display: flex;
-  overflow: hidden;
+export const DIRECTIONS = {
+  LTR: 'ltr',
+  RTL: 'rtl',
+};
 
-  &__view-track {
-    display: flex;
-    width: 100%;
-    transition: transform 200ms ease;
-  }
+export const getDirection = () =>
+  (
+    (typeof document !== 'undefined' &&
+      document.documentElement !== null &&
+      document.documentElement.getAttribute('dir')) ||
+    DIRECTIONS.LTR
+  ).toLowerCase();
 
-  &__view {
-    min-width: 100%;
-    display: flex;
-  }
-}
+export const isRTL = () => getDirection() === DIRECTIONS.RTL;

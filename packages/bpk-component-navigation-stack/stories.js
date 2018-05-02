@@ -19,13 +19,22 @@
 /* @flow */
 
 import React from 'react';
-import BpkText from 'bpk-component-text';
-import BpkButton from 'bpk-component-button';
 import { cssModules } from 'bpk-react-utils';
 import { storiesOf } from '@storybook/react';
+import BpkNavigationBar, {
+  BpkNavigationBarIconButton,
+} from 'bpk-component-navigation-bar';
+import { withRtlSupport } from 'bpk-component-icon';
+import { updateOnDirectionChange } from 'bpk-component-rtl-toggle';
+import BpkLeftArrowIcon from 'bpk-component-icon/sm/long-arrow-left';
+import BpkRightArrowIcon from 'bpk-component-icon/sm/long-arrow-right';
 
-import BpkNavigationStack from './index';
 import STYLES from './stories.scss';
+import BpkNavigationStack from './index';
+
+const LeftArrowIcon = withRtlSupport(BpkLeftArrowIcon);
+const RightArrowIcon = withRtlSupport(BpkRightArrowIcon);
+const RtlAwareBpkNavigationStack = updateOnDirectionChange(BpkNavigationStack);
 
 const getClassName = cssModules(STYLES);
 
@@ -40,32 +49,38 @@ const View = ({
   className: ?string,
 }) => (
   <section
-    className={[getClassName('bpk-navigation-stack-view'), className].join(' ')}
+    className={getClassName(
+      'bpk-navigation-stack-view',
+      index % 2 === 0 && 'bpk-navigation-stack-view--alternate',
+      className,
+    )}
     {...rest}
   >
-    <BpkText
-      tagName="h1"
-      textStyle="lg"
-      className={getClassName('bpk-navigation-stack-view__title')}
-    >
-      View {index}
-    </BpkText>
-    <BpkButton
-      onClick={() =>
-        navigationController &&
-        navigationController.pushView(<View index={index + 1} />)
+    <BpkNavigationBar
+      id={`my-navigation-bar-${index}`}
+      title={`View ${index}`}
+      leadingButton={
+        index > 1 ? (
+          <BpkNavigationBarIconButton
+            onClick={() =>
+              navigationController && navigationController.popView()
+            }
+            icon={LeftArrowIcon}
+            label="Back"
+          />
+        ) : null
       }
-    >
-      Add view
-    </BpkButton>
-    {index > 1 && (
-      <BpkButton
-        destructive
-        onClick={() => navigationController && navigationController.popView()}
-      >
-        Remove view
-      </BpkButton>
-    )}
+      trailingButton={
+        <BpkNavigationBarIconButton
+          onClick={() =>
+            navigationController &&
+            navigationController.pushView(<View index={index + 1} />)
+          }
+          icon={RightArrowIcon}
+          label="Next"
+        />
+      }
+    />
   </section>
 );
 
@@ -76,7 +91,7 @@ View.defaultProps = {
 };
 
 storiesOf('bpk-component-navigation-stack', module).add('Default', () => (
-  <BpkNavigationStack
+  <RtlAwareBpkNavigationStack
     className={getClassName('bpk-navigation-stack-wrapper')}
     initialViews={[<View />]}
   />

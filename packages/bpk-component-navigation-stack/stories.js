@@ -21,78 +21,50 @@
 import React from 'react';
 import { cssModules } from 'bpk-react-utils';
 import { storiesOf } from '@storybook/react';
-import BpkNavigationBar, {
-  BpkNavigationBarIconButton,
-} from 'bpk-component-navigation-bar';
-import { withRtlSupport } from 'bpk-component-icon';
 import { updateOnDirectionChange } from 'bpk-component-rtl-toggle';
-import BpkLeftArrowIcon from 'bpk-component-icon/sm/long-arrow-left';
-import BpkRightArrowIcon from 'bpk-component-icon/sm/long-arrow-right';
 
 import STYLES from './stories.scss';
-import BpkNavigationStack from './index';
+import BpkNavigationStack, { withNavigationStackState } from './index';
+import {
+  View,
+  SimpleNav,
+  NavigationBar,
+  withNavigationBar,
+} from './stories-components';
 
-const LeftArrowIcon = withRtlSupport(BpkLeftArrowIcon);
-const RightArrowIcon = withRtlSupport(BpkRightArrowIcon);
-const RtlAwareBpkNavigationStack = updateOnDirectionChange(BpkNavigationStack);
+const RtlAwareNavigationStack = updateOnDirectionChange(BpkNavigationStack);
+
+const StatefulNavigationStack = withNavigationStackState(
+  RtlAwareNavigationStack,
+);
+
+const NavigationStackWithBarOutside = withNavigationBar(
+  RtlAwareNavigationStack,
+);
+
+const StatefulNavigationStackWithBarOutside = withNavigationStackState(
+  NavigationStackWithBarOutside,
+  false,
+);
 
 const getClassName = cssModules(STYLES);
 
-const View = ({
-  index,
-  navigationController,
-  className,
-  ...rest
-}: {
-  index: number,
-  navigationController: ?BpkNavigationStack,
-  className: ?string,
-}) => (
-  <section
-    className={getClassName(
-      'bpk-navigation-stack-view',
-      index % 2 === 0 && 'bpk-navigation-stack-view--alternate',
-      className,
-    )}
-    {...rest}
-  >
-    <BpkNavigationBar
-      id={`my-navigation-bar-${index}`}
-      title={`View ${index}`}
-      leadingButton={
-        index > 1 ? (
-          <BpkNavigationBarIconButton
-            onClick={() =>
-              navigationController && navigationController.popView()
-            }
-            icon={LeftArrowIcon}
-            label="Back"
-          />
-        ) : null
-      }
-      trailingButton={
-        <BpkNavigationBarIconButton
-          onClick={() =>
-            navigationController &&
-            navigationController.pushView(<View index={index + 1} />)
-          }
-          icon={RightArrowIcon}
-          label="Next"
-        />
-      }
+storiesOf('bpk-component-navigation-stack', module)
+  .add('Default', () => (
+    <StatefulNavigationStack
+      className={getClassName('bpk-navigation-stack-story-wrapper')}
+      initialViews={[<View>{props => <SimpleNav {...props} />}</View>]}
     />
-  </section>
-);
-
-View.defaultProps = {
-  index: 1,
-  navigationController: null,
-  className: null,
-};
-
-storiesOf('bpk-component-navigation-stack', module).add('Default', () => (
-  <RtlAwareBpkNavigationStack
-    className={getClassName('bpk-navigation-stack-wrapper')}
-    initialViews={[<View />]}
-  />
-));
+  ))
+  .add('With navigation bar', () => (
+    <StatefulNavigationStack
+      className={getClassName('bpk-navigation-stack-story-wrapper')}
+      initialViews={[<View>{props => <NavigationBar {...props} />}</View>]}
+    />
+  ))
+  .add('With navigation bar outside', () => (
+    <StatefulNavigationStackWithBarOutside
+      className={getClassName('bpk-navigation-stack-story-wrapper')}
+      initialViews={[<View noNavBar>{() => null}</View>]}
+    />
+  ));

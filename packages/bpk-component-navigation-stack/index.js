@@ -18,6 +18,13 @@
 
 /* @flow */
 
-import BpkNavigationStack from './src/BpkNavigationStack';
+import withNavigationStackState, {
+  type Props as StateProps,
+} from './src/withNavigationStackState';
+import BpkNavigationStack, { type Props } from './src/BpkNavigationStack';
+
+export type BpkNavigationStackProps = Props;
+export type StatefulBpkNavigationStackProps = StateProps;
 
 export default BpkNavigationStack;
+export { withNavigationStackState };

@@ -25,7 +25,7 @@ import BpkNavigationStack from './BpkNavigationStack';
 describe('BpkNavigationStack', () => {
   it('should render correctly', () => {
     const tree = renderer
-      .create(<BpkNavigationStack initialViews={[<div />]} />)
+      .create(<BpkNavigationStack views={[<div />]} />)
       .toJSON();
 
     expect(tree).toMatchSnapshot();

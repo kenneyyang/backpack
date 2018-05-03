@@ -25,11 +25,11 @@
   &__view-track {
     display: flex;
     width: 100%;
-    transition: transform 200ms ease;
+    transition: transform $bpk-duration-sm ease;
   }
 
   &__view {
-    min-width: 100%;
     display: flex;
+    min-width: 100%;
   }
 }

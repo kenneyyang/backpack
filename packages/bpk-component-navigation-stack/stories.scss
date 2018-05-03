@@ -18,18 +18,22 @@
 
 @import '~bpk-mixins';
 
-.bpk-navigation-stack-wrapper {
+.bpk-navigation-stack-story-wrapper {
   max-width: $bpk-spacing-xxl * 8;
-  min-height: $bpk-spacing-xxl * 12;
 
   @include bpk-border-sm($bpk-color-gray-100, '');
 }
 
 .bpk-navigation-stack-view {
+  min-height: $bpk-spacing-xxl * 12;
   flex: 1;
   background-color: $bpk-color-gray-100;
 
   &--alternate {
     background-color: $bpk-color-gray-50;
+  }
+
+  &--no-nav-bar {
+    min-height: ($bpk-spacing-xxl * 12) - ($bpk-spacing-base * 2);
   }
 }

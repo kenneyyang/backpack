@@ -19,94 +19,85 @@
 /* @flow */
 
 import { cssModules } from 'bpk-react-utils';
+import React, { Children, type Element } from 'react';
 import { durationSm } from 'bpk-tokens/tokens/base.es6';
 import { TransitionGroup, Transition } from 'react-transition-group';
-import React, { Component, cloneElement, Children, type Element } from 'react';
 
 import { isRTL } from './utils';
 import STYLES from './BpkNavigationStack.scss';
 
 const getClassName = cssModules(STYLES);
 
-type Props = {
-  initialViews: Array<Element<any>>,
+export type Views = Array<Element<any>>;
+
+export type Props = {
+  views: Views,
   className: ?string,
 };
 
-type State = {
-  views: Array<Element<any>>,
+// class WithTabControl extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.containerRef = null;
+//   }
+//   componentDidMount() {
+
+//   }
+
+//   updateTabIndex(newTabIndex) {
+
+//   }
+
+//   render() {
+//     return (
+//       <div
+//         ref={ref => {
+//           this.containerRef = ref;
+//         }}
+//       >
+//         {this.props.children}
+//       </div>
+//     );
+//   }
+// }
+
+const BpkNavigationStack = (props: Props) => {
+  const { views, className, ...rest } = props;
+  const lastViewIndex = (views || []).length - 1;
+
+  return (
+    <div
+      className={getClassName('bpk-navigation-stack', className && className)}
+      {...rest}
+    >
+      <TransitionGroup
+        className={getClassName('bpk-navigation-stack__view-track')}
+        style={{
+          transform: `translateX(${
+            lastViewIndex === 0
+              ? '0%'
+              : `${isRTL() ? '' : '-'}${lastViewIndex}00%`
+          })`,
+        }}
+      >
+        {Children.map(views, (view, idx) => (
+          <Transition timeout={parseInt(durationSm, 10)}>
+            <div
+              style={{ display: idx === lastViewIndex ? 'flex' : 'none' }}
+              aria-hidden={idx !== lastViewIndex}
+              className={getClassName('bpk-navigation-stack__view')}
+            >
+              {view}
+            </div>
+          </Transition>
+        ))}
+      </TransitionGroup>
+    </div>
+  );
 };
 
-class BpkNavigationStack extends Component<Props, State> {
-  static defaultProps = {
-    className: null,
-  };
-
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-      views: this.props.initialViews,
-    };
-  }
-
-  pushView(view: Element<any>) {
-    this.setState(prevState => {
-      const views = prevState.views.slice();
-      views.push(view);
-
-      return {
-        views,
-      };
-    });
-  }
-
-  popView() {
-    this.setState(prevState => {
-      const views = prevState.views.slice();
-      views.pop();
-
-      return {
-        views,
-      };
-    });
-  }
-
-  render() {
-    const {
-      initialViews, // unused
-      className,
-      ...rest
-    } = this.props;
-
-    const lastViewIndex = this.state.views.length - 1;
-
-    return (
-      <div
-        className={getClassName('bpk-navigation-stack', className && className)}
-        {...rest}
-      >
-        <TransitionGroup
-          className={getClassName('bpk-navigation-stack__view-track')}
-          style={{
-            transform: `translateX(${
-              lastViewIndex === 0
-                ? '0%'
-                : `${isRTL() ? '' : '-'}${lastViewIndex}00%`
-            })`,
-          }}
-        >
-          {Children.map(this.state.views, view => (
-            <Transition timeout={parseInt(durationSm, 10)}>
-              <div className={getClassName('bpk-navigation-stack__view')}>
-                {cloneElement(view, { navigationController: this })}
-              </div>
-            </Transition>
-          ))}
-        </TransitionGroup>
-      </div>
-    );
-  }
-}
+BpkNavigationStack.defaultProps = {
+  className: null,
+};
 
 export default BpkNavigationStack;

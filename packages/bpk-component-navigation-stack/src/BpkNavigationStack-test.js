@@ -30,4 +30,15 @@ describe('BpkNavigationStack', () => {
 
     expect(tree).toMatchSnapshot();
   });
+
+  it('should set "aria-hidden" to true on non active views', () => {
+    const tree = renderer
+      .create(<BpkNavigationStack views={[<div />, <div />, <div />]} />)
+      .toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  // TODO: test tabbable property
+  // TODO: test autoFocus property
 });

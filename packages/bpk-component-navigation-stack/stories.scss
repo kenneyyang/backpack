@@ -36,4 +36,11 @@
   &--no-nav-bar {
     min-height: ($bpk-spacing-xxl * 12) - ($bpk-spacing-base * 2);
   }
+
+  &--centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
+

@@ -19,10 +19,11 @@
 /* @flow */
 
 import { cssModules } from 'bpk-react-utils';
-import React, { Children, type Element } from 'react';
+import React, { Component, Children, type Element } from 'react';
 import { durationSm } from 'bpk-tokens/tokens/base.es6';
 import { TransitionGroup, Transition } from 'react-transition-group';
 
+import TabbableContainer from './TabbableContainer';
 import { isRTL } from './utils';
 import STYLES from './BpkNavigationStack.scss';
 
@@ -33,71 +34,65 @@ export type Views = Array<Element<any>>;
 export type Props = {
   views: Views,
   className: ?string,
+  autoFocusNextView: boolean,
 };
 
-// class WithTabControl extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.containerRef = null;
-//   }
-//   componentDidMount() {
+class BpkNavigationStack extends Component<Props, {}> {
+  firstRender: boolean;
 
-//   }
+  static defaultProps = {
+    className: null,
+    autoFocusNextView: false,
+  };
 
-//   updateTabIndex(newTabIndex) {
+  constructor(props: Props) {
+    super(props);
+    this.firstRender = true;
+  }
 
-//   }
+  componentWillReceiveProps() {
+    this.firstRender = false;
+  }
 
-//   render() {
-//     return (
-//       <div
-//         ref={ref => {
-//           this.containerRef = ref;
-//         }}
-//       >
-//         {this.props.children}
-//       </div>
-//     );
-//   }
-// }
+  render() {
+    const { views, className, autoFocusNextView, ...rest } = this.props;
+    const lastViewIndex = (views || []).length - 1;
 
-const BpkNavigationStack = (props: Props) => {
-  const { views, className, ...rest } = props;
-  const lastViewIndex = (views || []).length - 1;
-
-  return (
-    <div
-      className={getClassName('bpk-navigation-stack', className && className)}
-      {...rest}
-    >
-      <TransitionGroup
-        className={getClassName('bpk-navigation-stack__view-track')}
-        style={{
-          transform: `translateX(${
-            lastViewIndex === 0
-              ? '0%'
-              : `${isRTL() ? '' : '-'}${lastViewIndex}00%`
-          })`,
-        }}
+    return (
+      <div
+        className={getClassName('bpk-navigation-stack', className)}
+        {...rest}
       >
-        {Children.map(views, (view, idx) => (
-          <Transition timeout={parseInt(durationSm, 10)}>
-            <div
-              style={{ display: idx === lastViewIndex ? 'flex' : 'none' }}
-              aria-hidden={idx !== lastViewIndex}
-              className={getClassName('bpk-navigation-stack__view')}
-            >
-              {view}
-            </div>
-          </Transition>
-        ))}
-      </TransitionGroup>
-    </div>
-  );
-};
-
-BpkNavigationStack.defaultProps = {
-  className: null,
-};
+        <TransitionGroup
+          className={getClassName('bpk-navigation-stack__view-track')}
+          style={{
+            transform: `translateX(${
+              lastViewIndex === 0
+                ? '0%'
+                : `${isRTL() ? '' : '-'}${lastViewIndex}00%`
+            })`,
+          }}
+        >
+          {Children.map(views, (view, idx) => (
+            <Transition timeout={parseInt(durationSm, 10)}>
+              <TabbableContainer
+                tabbable={idx === lastViewIndex}
+                autoFocus={
+                  !this.firstRender &&
+                  autoFocusNextView &&
+                  idx === lastViewIndex
+                }
+                aria-hidden={idx !== lastViewIndex}
+                className={getClassName('bpk-navigation-stack__view')}
+              >
+                {view}
+              </TabbableContainer>
+            </Transition>
+          ))}
+        </TransitionGroup>
+      </div>
+    );
+  }
+}
 
 export default BpkNavigationStack;

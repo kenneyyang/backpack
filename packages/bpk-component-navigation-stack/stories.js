@@ -52,12 +52,14 @@ const getClassName = cssModules(STYLES);
 storiesOf('bpk-component-navigation-stack', module)
   .add('Default', () => (
     <StatefulNavigationStack
+      autoFocusNextView
       className={getClassName('bpk-navigation-stack-story-wrapper')}
-      initialViews={[<View>{props => <SimpleNav {...props} />}</View>]}
+      initialViews={[<View centered>{props => <SimpleNav {...props} />}</View>]}
     />
   ))
   .add('With navigation bar', () => (
     <StatefulNavigationStack
+      autoFocusNextView
       className={getClassName('bpk-navigation-stack-story-wrapper')}
       initialViews={[<View>{props => <NavigationBar {...props} />}</View>]}
     />

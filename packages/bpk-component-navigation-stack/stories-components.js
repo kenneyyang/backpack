@@ -31,6 +31,7 @@ import React, {
 } from 'react';
 import BpkLeftArrowIcon from 'bpk-component-icon/sm/long-arrow-left';
 import BpkRightArrowIcon from 'bpk-component-icon/sm/long-arrow-right';
+import omit from 'lodash/omit';
 
 import STYLES from './stories.scss';
 import BpkNavigationStack from './index';
@@ -47,6 +48,7 @@ export const View = ({
   popView,
   className,
   noNavBar,
+  centered,
   ...rest
 }: {
   children: ({
@@ -59,12 +61,14 @@ export const View = ({
   popView: ?() => mixed,
   className: ?string,
   noNavBar: boolean,
+  centered: boolean,
 }) => (
   <section
     className={getClassName(
       'bpk-navigation-stack-view',
       index % 2 === 0 && 'bpk-navigation-stack-view--alternate',
       noNavBar && 'bpk-navigation-stack-view--no-nav-bar',
+      centered && 'bpk-navigation-stack-view--centered',
       className,
     )}
     {...rest}
@@ -79,6 +83,7 @@ View.defaultProps = {
   pushView: null,
   popView: null,
   noNavBar: false,
+  centered: false,
 };
 
 export const SimpleNav = ({
@@ -95,7 +100,9 @@ export const SimpleNav = ({
       onClick={() =>
         pushView &&
         pushView(
-          <View index={index + 1}>{props => <SimpleNav {...props} />}</View>,
+          <View index={index + 1} centered>
+            {props => <SimpleNav {...props} />}
+          </View>,
         )
       }
     >
@@ -170,7 +177,7 @@ export const withNavigationBar = (
     pushView: ?(Element<any>) => mixed,
     popView: ?() => mixed,
   }) => (
-    <div {...rest}>
+    <div {...omit(rest, 'autoFocusNextView')}>
       <NavigationBar
         index={views.length - 1}
         pushView={pushView}

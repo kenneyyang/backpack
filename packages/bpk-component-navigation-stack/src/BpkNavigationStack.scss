@@ -25,11 +25,23 @@
   &__view-track {
     display: flex;
     width: 100%;
-    transition: transform $bpk-duration-sm ease;
+
+    &--animating {
+      transition: transform $bpk-duration-sm ease;
+    }
   }
 
   &__view {
     display: flex;
     min-width: 100%;
+
+    &--backwards {
+      transform: translateX(-100%);
+      transition: none;
+
+      @include bpk-rtl {
+        transform: translateX(100%);
+      }
+    }
   }
 }

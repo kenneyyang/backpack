@@ -20,7 +20,6 @@
 
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { shallow } from 'enzyme';
 import BpkNavigationStack from './BpkNavigationStack';
 
 describe('BpkNavigationStack', () => {
@@ -30,40 +29,5 @@ describe('BpkNavigationStack', () => {
       .toJSON();
 
     expect(tree).toMatchSnapshot();
-  });
-
-  it('should set "aria-hidden" to true on non active views', () => {
-    const tree = renderer
-      .create(<BpkNavigationStack views={[<div />, <div />, <div />]} />)
-      .toJSON();
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('should set "tabbable" to true on the last view', () => {
-    const tree = shallow(
-      <BpkNavigationStack views={[<span />, <span />, <span />]} />,
-    );
-    const containers = tree.find('TabbableContainer');
-    expect(containers.at(0).props().tabbable).toBe(false);
-    expect(containers.at(1).props().tabbable).toBe(false);
-    expect(containers.at(2).props().tabbable).toBe(true);
-  });
-
-  it('should set "autoFocus" to true on the last view, after the first render', () => {
-    const tree = shallow(
-      <BpkNavigationStack views={[<span />, <span />]} autoFocusNextView />,
-    );
-
-    let containers = tree.find('TabbableContainer');
-    expect(containers.at(0).props().autoFocus).toBe(false);
-    expect(containers.at(1).props().autoFocus).toBe(false);
-
-    tree.setProps({ views: [<span />, <span />, <span />] });
-
-    containers = tree.find('TabbableContainer');
-    expect(containers.at(0).props().autoFocus).toBe(false);
-    expect(containers.at(1).props().autoFocus).toBe(false);
-    expect(containers.at(2).props().autoFocus).toBe(true);
   });
 });

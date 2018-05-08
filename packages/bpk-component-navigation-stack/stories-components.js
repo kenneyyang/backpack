@@ -31,7 +31,6 @@ import React, {
 } from 'react';
 import BpkLeftArrowIcon from 'bpk-component-icon/sm/long-arrow-left';
 import BpkRightArrowIcon from 'bpk-component-icon/sm/long-arrow-right';
-import omit from 'lodash/omit';
 
 import STYLES from './stories.scss';
 import BpkNavigationStack from './index';
@@ -177,7 +176,7 @@ export const withNavigationBar = (
     pushView: ?(Element<any>) => mixed,
     popView: ?() => mixed,
   }) => (
-    <div {...omit(rest, 'autoFocusNextView')}>
+    <div {...rest}>
       <NavigationBar
         index={views.length - 1}
         pushView={pushView}

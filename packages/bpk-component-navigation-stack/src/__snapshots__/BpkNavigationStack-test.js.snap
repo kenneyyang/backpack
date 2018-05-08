@@ -14,7 +14,6 @@ exports[`BpkNavigationStack should render correctly 1`] = `
   >
     <div
       aria-hidden={false}
-      autoFocus={false}
       className="bpk-navigation-stack__view"
     >
       <div />
@@ -37,21 +36,18 @@ exports[`BpkNavigationStack should set "aria-hidden" to true on non active views
   >
     <div
       aria-hidden={true}
-      autoFocus={false}
       className="bpk-navigation-stack__view"
     >
       <div />
     </div>
     <div
       aria-hidden={true}
-      autoFocus={false}
       className="bpk-navigation-stack__view"
     >
       <div />
     </div>
     <div
       aria-hidden={false}
-      autoFocus={false}
       className="bpk-navigation-stack__view"
     >
       <div />

@@ -20,6 +20,7 @@
 
 import React, { Component, type Node } from 'react';
 import PropTypes from 'prop-types';
+import omit from 'lodash/omit';
 import { durationSm } from 'bpk-tokens/tokens/base.es6';
 
 const FUCUSABLE_SELECTOR =
@@ -60,16 +61,15 @@ export default class TabbableContainer extends Component<Props, {}> {
       this.containerRef.querySelectorAll('*').forEach(elem => {
         const tabIndex = elem.getAttribute('tabindex');
         if (!tabbable) {
-          if (tabIndex != null) {
-            elem.setAttribute('data-bpkprevtabindex', tabIndex);
-          }
+          elem.setAttribute('data-bpkprevtabindex', tabIndex);
           elem.setAttribute('tabindex', -1);
         } else {
           const prevTabIndex = elem.getAttribute('data-bpkprevtabindex');
           const touched = elem.hasAttribute('data-bpkprevtabindex');
-          if (prevTabIndex == null && touched) {
-            elem.removeAttribute('tabIndex');
-          } else if (prevTabIndex != null) {
+          const hasPrevIndex = prevTabIndex != null && prevTabIndex !== 'null';
+          if (!hasPrevIndex && touched) {
+            elem.removeAttribute('tabindex');
+          } else if (hasPrevIndex) {
             elem.setAttribute('tabindex', prevTabIndex);
           }
         }
@@ -88,14 +88,12 @@ export default class TabbableContainer extends Component<Props, {}> {
 
   render() {
     const { children, ...rest } = this.props;
-    delete rest.tabbable;
-
     return (
       <div
         ref={ref => {
           this.containerRef = ref;
         }}
-        {...rest}
+        {...omit(rest, 'tabbable', 'autoFocus')}
       >
         {children}
       </div>

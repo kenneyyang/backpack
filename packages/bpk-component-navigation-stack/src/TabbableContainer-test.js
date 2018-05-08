@@ -24,6 +24,14 @@ import { mount } from 'enzyme';
 import TabbableContainer from './TabbableContainer';
 
 describe('BpkNavigationStack - TabbableContainer', () => {
+  beforeAll(() => {
+    jest.useFakeTimers();
+  });
+
+  afterAll(() => {
+    jest.useRealTimers();
+  });
+
   it('should render correctly', () => {
     const tree = renderer
       .create(
@@ -90,20 +98,62 @@ describe('BpkNavigationStack - TabbableContainer', () => {
     ).toBe('2');
   });
 
-  it('should focus the first focusable element when `autoFocus` is set to true', () => {
+  it('should not interfer with non tabbable elements', () => {
     const tree = mount(
-      <TabbableContainer tabbable autoFocus>
-        <div>
+      <TabbableContainer tabbable autoFocus={false}>
+        <button id="non-tabbable" tabIndex="-1" />
+      </TabbableContainer>,
+    );
+
+    expect(
+      tree
+        .getDOMNode()
+        .querySelector('#non-tabbable')
+        .getAttribute('tabindex'),
+    ).toBe('-1');
+  });
+
+  it('should focus the first focusable element when `autoFocus` is set to true', () => {
+    const tests = [
+      [
+        <div key="1">
           <input tabIndex="-1" />
           <span />
           <button id="focus-me" />
           <input />
-        </div>
-      </TabbableContainer>,
-    );
-    // TODO: not working (it is working actually, just the test isn't)
-    const elem = tree.find('#focus-me');
+        </div>,
+      ],
+      [
+        <div key="2">
+          <input tabIndex="-1" />
+          <span id="focus-me" tabIndex="1" /> {/* eslint-disable-line */}
+        </div>,
+      ],
+      [
+        <div key="3">
+          <input id="focus-me" />
+          <span tabIndex="1" /> {/* eslint-disable-line */}
+        </div>,
+      ],
+      [
+        <div key="4">
+          <a id="focus-me" href="http://skyscanner.net">
+            focus
+          </a>
+          <input />
+        </div>,
+      ],
+    ];
 
-    expect(elem.matchesElement(document.activeElement)).toBe(true);
+    tests.forEach(test => {
+      const tree = mount(
+        <TabbableContainer tabbable autoFocus>
+          {test}
+        </TabbableContainer>,
+      );
+      const elem = tree.getDOMNode().querySelector('#focus-me');
+      jest.runAllTimers();
+      expect(document.activeElement).toBe(elem);
+    });
   });
 });

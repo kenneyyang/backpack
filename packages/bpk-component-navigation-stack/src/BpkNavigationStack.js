@@ -50,7 +50,7 @@ class BpkNavigationStack extends Component<Props, {}> {
     this.firstRender = true;
   }
 
-  componentWillReceiveProps() {
+  componentWillUpdate() {
     this.firstRender = false;
   }
 

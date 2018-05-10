@@ -78,6 +78,7 @@ configure(() => {
   require('./../packages/bpk-component-image/stories');
   require('./../packages/bpk-component-input/stories');
   require('./../packages/bpk-component-label/stories');
+  require('./../packages/bpk-component-map/stories');
   require('./../packages/bpk-component-link/stories');
   require('./../packages/bpk-component-list/stories');
   require('./../packages/bpk-component-loading-button/stories');

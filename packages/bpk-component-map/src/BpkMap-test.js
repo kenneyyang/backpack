@@ -18,15 +18,9 @@
 /* @flow */
 
 import React from 'react';
-import { storiesOf } from '@storybook/react';
+import renderer from 'react-test-renderer';
+import BpkMap from './BpkMap';
 
-import BpkLabel from './index';
+describe('BpkMap', () => {
 
-storiesOf('bpk-component-label', module)
-  .add('Example', () => <BpkLabel htmlFor="origin">Origin</BpkLabel>)
-  .add('disabled', () => <BpkLabel htmlFor="origin" disabled>Origin</BpkLabel>)
-  .add('Required', () => (
-    <BpkLabel htmlFor="origin" required>
-      Origin
-    </BpkLabel>
-  ));
+});

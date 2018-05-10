@@ -20,13 +20,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import BpkLabel from './index';
+import { BpkMap, BpkMapMarker } from './index';
 
-storiesOf('bpk-component-label', module)
-  .add('Example', () => <BpkLabel htmlFor="origin">Origin</BpkLabel>)
-  .add('disabled', () => <BpkLabel htmlFor="origin" disabled>Origin</BpkLabel>)
-  .add('Required', () => (
-    <BpkLabel htmlFor="origin" required>
-      Origin
-    </BpkLabel>
-  ));
+storiesOf('bpk-component-map', module)
+  .add('Example', () => <BpkMap
+    zoom={15}
+    centerLatitude={55.944357}
+    centerLongitude={-3.1967116}>
+    <BpkMapMarker latitude={55.944357} longitude={-3.1967116} title="Skyscanner" />
+  </BpkMap>);

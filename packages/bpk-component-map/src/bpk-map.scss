@@ -15,18 +15,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/* @flow */
 
-import React from 'react';
-import { storiesOf } from '@storybook/react';
+@import '~bpk-mixins';
 
-import BpkLabel from './index';
+.bpk-map {
 
-storiesOf('bpk-component-label', module)
-  .add('Example', () => <BpkLabel htmlFor="origin">Origin</BpkLabel>)
-  .add('disabled', () => <BpkLabel htmlFor="origin" disabled>Origin</BpkLabel>)
-  .add('Required', () => (
-    <BpkLabel htmlFor="origin" required>
-      Origin
-    </BpkLabel>
-  ));
+  &__container {
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+
+  &__marker {
+    padding: $bpk-spacing-base;
+  }
+}

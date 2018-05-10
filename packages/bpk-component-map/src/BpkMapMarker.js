@@ -64,8 +64,9 @@ class BpkMapMarker extends Component {
         position={{ lat: latitude, lng: longitude }}
         onClick={this.handleClickEvent(onClick)}
       >
-        { this.state.isOpen && title ? (<div>{title}</div>) : null}
-      </Marker>);
+        {this.state.isOpen && title ? <div>{title}</div> : null}
+      </Marker>
+    );
   }
 }
 

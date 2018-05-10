@@ -17,5 +17,10 @@
     "bpk-react-utils": "^2.6.1",
     "prop-types": "^15.5.8",
     "react-google-maps": "^9.4.5"
+  },
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-plugin-react": "^7.7.0"
   }
 }
+ 

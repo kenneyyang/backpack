@@ -28,19 +28,30 @@ const getClassName = cssModules(STYLES);
 const BpkMap = props => {
   const { children, ...rest } = props;
 
-  const InnerMap = withScriptjs(withGoogleMap(() => (
-    <GoogleMap
-      defaultZoom={props.zoom}
-      defaultCenter={{ lat: props.centerLatitude, lng: props.centerLongitude }}
-      {...rest}
-    >
-      {children}
-    </GoogleMap>
-  )));
+  const InnerMap = withScriptjs(
+    withGoogleMap(() => (
+      <GoogleMap
+        defaultZoom={props.zoom}
+        defaultCenter={{
+          lat: props.centerLatitude,
+          lng: props.centerLongitude,
+        }}
+        options={{
+          scrollwheel: props.zoomControl,
+          zoomControl: props.zoomControl,
+        }}
+        {...rest}
+      >
+        {children}
+      </GoogleMap>
+    )),
+  );
 
   return (
     <InnerMap
-      googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBjeijuDttvvujmN_XZB9304o3lPn6WGDM&v=3.exp&libraries=geometry,drawing,places&language=${props.language}`}
+      googleMapURL={`https://maps.googleapis.com/maps/api/js?key=AIzaSyBjeijuDttvvujmN_XZB9304o3lPn6WGDM&v=3.exp
+      &libraries=geometry,drawing,places
+      &language=${props.language}`}
       loadingElement={<div>Loading</div>}
       mapElement={<div style={{ width: props.width, height: props.height }} />}
       containerElement={<div className={getClassName('bpk-map__container')} />}
@@ -51,6 +62,7 @@ const BpkMap = props => {
 BpkMap.propTypes = {
   children: PropTypes.node,
   language: PropTypes.string,
+  zoomControl: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
   zoom: PropTypes.number.isRequired,
@@ -60,6 +72,7 @@ BpkMap.propTypes = {
 
 BpkMap.defaultProps = {
   children: null,
+  zoomControl: true,
   language: '',
   width: '100%',
   height: '100%',

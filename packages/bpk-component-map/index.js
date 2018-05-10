@@ -20,7 +20,4 @@
 import BpkMap from './src/BpkMap';
 import BpkMapMarker from './src/BpkMapMarker';
 
-export {
-  BpkMap,
-  BpkMapMarker,
-};
+export { BpkMap, BpkMapMarker };

@@ -17,10 +17,8 @@
  */
 /* @flow */
 
-import React from 'react';
-import renderer from 'react-test-renderer';
-import BpkMap from './BpkMap';
+// import React from 'react';
+// import renderer from 'react-test-renderer';
+// import BpkMap from './BpkMap';
 
-describe('BpkMap', () => {
-
-});
+// describe('BpkMap', () => {});

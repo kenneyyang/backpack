@@ -23,9 +23,29 @@ import { storiesOf } from '@storybook/react';
 import { BpkMap, BpkMapMarker } from './index';
 
 storiesOf('bpk-component-map', module)
-  .add('Example', () => <BpkMap
-    zoom={15}
-    centerLatitude={55.944357}
-    centerLongitude={-3.1967116}>
-    <BpkMapMarker latitude={55.944357} longitude={-3.1967116} title="Skyscanner" />
-  </BpkMap>);
+  .add('Example', () => (
+    <BpkMap zoom={15} centerLatitude={55.944357} centerLongitude={-3.1967116}>
+      <BpkMapMarker
+        latitude={55.944357}
+        longitude={-3.1967116}
+        title="Skyscanner"
+      />
+    </BpkMap>
+  ))
+  .add('Example 2', () => (
+    <BpkMap
+      zoom={15}
+      zoomControl={false}
+      width="600px"
+      height={600}
+      language="zh"
+      centerLatitude={55.944357}
+      centerLongitude={-3.1967116}
+    >
+      <BpkMapMarker
+        latitude={55.944357}
+        longitude={-3.1967116}
+        title="Skyscanner"
+      />
+    </BpkMap>
+  ));

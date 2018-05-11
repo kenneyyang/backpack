@@ -27,7 +27,6 @@ const getClassName = cssModules(STYLES);
 
 const BpkMap = props => {
   const { children, ...rest } = props;
-
   const InnerMap = withScriptjs(
     withGoogleMap(() => (
       <GoogleMap
@@ -39,6 +38,7 @@ const BpkMap = props => {
         options={{
           scrollwheel: props.zoomControl,
           zoomControl: props.zoomControl,
+          draggable: false,
         }}
         {...rest}
       >

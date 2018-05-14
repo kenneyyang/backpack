@@ -48,4 +48,12 @@ storiesOf('bpk-component-map', module)
         title="Skyscanner"
       />
     </BpkMap>
+  ))
+  .add('BoundBox', () => (
+    <BpkMap
+      boundSouth={40.712216}
+      boundWest={-74.226556}
+      boundNorth={40.773941}
+      boundEast={-74.12544}
+    />
   ));

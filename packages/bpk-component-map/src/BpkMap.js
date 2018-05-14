@@ -19,7 +19,12 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withScriptjs, withGoogleMap, GoogleMap } from 'react-google-maps';
+import {
+  withScriptjs,
+  withGoogleMap,
+  GoogleMap,
+  Rectangle,
+} from 'react-google-maps';
 import { cssModules } from 'bpk-react-utils';
 import STYLES from './bpk-map.scss';
 
@@ -30,6 +35,19 @@ const BpkMap = props => {
   const InnerMap = withScriptjs(
     withGoogleMap(() => (
       <GoogleMap
+        ref={map =>
+          map &&
+          props.boundSouth &&
+          props.boundWest &&
+          props.boundNorth &&
+          props.boundEast &&
+          map.fitBounds(
+            new google.maps.LatLngBounds(
+              new google.maps.LatLng(props.boundSouth, props.boundWest),
+              new google.maps.LatLng(props.boundNorth, props.boundEast),
+            ),
+          )
+        }
         defaultZoom={props.zoom}
         defaultCenter={{
           lat: props.centerLatitude,
@@ -42,6 +60,14 @@ const BpkMap = props => {
         }}
         {...rest}
       >
+        <Rectangle
+          defaultBounds={
+            new google.maps.LatLngBounds(
+              new google.maps.LatLng(props.boundSouth, props.boundWest),
+              new google.maps.LatLng(props.boundNorth, props.boundEast),
+            )
+          }
+        />
         {children}
       </GoogleMap>
     )),
@@ -65,6 +91,10 @@ BpkMap.propTypes = {
   zoomControl: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
+  boundSouth: PropTypes.number,
+  boundWest: PropTypes.number,
+  boundNorth: PropTypes.number,
+  boundEast: PropTypes.number,
   zoom: PropTypes.number.isRequired,
   centerLatitude: PropTypes.number.isRequired,
   centerLongitude: PropTypes.number.isRequired,
@@ -73,6 +103,10 @@ BpkMap.propTypes = {
 BpkMap.defaultProps = {
   children: null,
   zoomControl: true,
+  boundSouth: null,
+  boundWest: null,
+  boundNorth: null,
+  boundEast: null,
   language: '',
   width: '100%',
   height: '100%',

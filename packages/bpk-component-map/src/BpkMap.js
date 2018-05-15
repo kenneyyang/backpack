@@ -60,7 +60,7 @@ const BpkMap = props => {
         }}
         options={{
           zoomControl: props.zoomControl,
-          draggable: props.draggable,
+          draggable: true,
         }}
         {...rest}
       >

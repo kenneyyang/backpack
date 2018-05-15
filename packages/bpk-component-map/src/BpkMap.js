@@ -16,6 +16,7 @@
  * limitations under the License.
  */
 /* @flow */
+/* global google */
 
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -41,6 +42,10 @@ const BpkMap = props => {
           props.boundWest &&
           props.boundNorth &&
           props.boundEast &&
+          // map.fitBounds(
+          //   { lat: props.boundSouth, lng: props.boundWest },
+          //   { lat: props.boundNorth, lng: props.boundEast },
+          // )
           map.fitBounds(
             new google.maps.LatLngBounds(
               new google.maps.LatLng(props.boundSouth, props.boundWest),

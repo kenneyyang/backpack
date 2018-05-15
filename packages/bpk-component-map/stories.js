@@ -53,7 +53,14 @@ storiesOf('bpk-component-map', module)
     <BpkMap
       boundSouth={40.712216}
       boundWest={-74.226556}
-      boundNorth={40.773941}
+      boundNorth={41.773941}
       boundEast={-74.12544}
-    />
+    >
+      <BpkMapMarker
+        latitude={40.944357}
+        longitude={-74.1967116}
+        title="Skyscanner"
+        type="station"
+      />
+    </BpkMap>
   ));

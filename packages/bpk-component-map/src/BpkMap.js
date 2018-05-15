@@ -54,9 +54,8 @@ const BpkMap = props => {
           lng: props.centerLongitude,
         }}
         options={{
-          scrollwheel: props.zoomControl,
           zoomControl: props.zoomControl,
-          draggable: false,
+          draggable: props.draggable,
         }}
         {...rest}
       >
@@ -89,6 +88,7 @@ BpkMap.propTypes = {
   children: PropTypes.node,
   language: PropTypes.string,
   zoomControl: PropTypes.bool,
+  draggable: PropTypes.bool,
   width: PropTypes.string,
   height: PropTypes.string,
   boundSouth: PropTypes.number,
@@ -102,6 +102,7 @@ BpkMap.propTypes = {
 
 BpkMap.defaultProps = {
   children: null,
+  draggable: true,
   zoomControl: true,
   boundSouth: null,
   boundWest: null,

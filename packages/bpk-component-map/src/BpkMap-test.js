@@ -17,8 +17,45 @@
  */
 /* @flow */
 
-// import React from 'react';
-// import renderer from 'react-test-renderer';
-// import BpkMap from './BpkMap';
+import React from 'react';
+import renderer from 'react-test-renderer';
+import BpkMap from './BpkMap';
+import BpkMapMarker from './BpkMapMarker';
 
-// describe('BpkMap', () => {});
+describe('BpkMap', () => {
+  it('should render correctly', () => {
+    const tree = renderer
+      .create(
+        <BpkMap
+          zoom={15}
+          centerLatitude={55.944357}
+          centerLongitude={-3.1967116}
+        />,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render correctly', () => {
+    const tree = renderer
+      .create(
+        <BpkMap
+          zoom={15}
+          zoomControl={false}
+          width="600px"
+          height="600"
+          language="zh"
+          centerLatitude={55.944357}
+          centerLongitude={-3.1967116}
+        >
+          <BpkMapMarker
+            latitude={55.944357}
+            longitude={-3.1967116}
+            title="Skyscanner"
+          />
+        </BpkMap>,
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});

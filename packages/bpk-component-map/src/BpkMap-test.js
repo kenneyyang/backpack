@@ -58,4 +58,9 @@ describe('BpkMap', () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it('should not render correctly', () => {
+    const tree = renderer.create(<BpkMap />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

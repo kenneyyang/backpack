@@ -100,12 +100,15 @@ BpkMap.propTypes = {
   boundWest: PropTypes.number,
   boundNorth: PropTypes.number,
   boundEast: PropTypes.number,
-  zoom: PropTypes.number.isRequired,
-  centerLatitude: PropTypes.number.isRequired,
-  centerLongitude: PropTypes.number.isRequired,
+  zoom: PropTypes.number,
+  centerLatitude: PropTypes.number,
+  centerLongitude: PropTypes.number,
 };
 
 BpkMap.defaultProps = {
+  zoom: null,
+  centerLatitude: null,
+  centerLongitude: null,
   children: null,
   draggable: true,
   zoomControl: true,

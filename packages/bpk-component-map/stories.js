@@ -38,7 +38,7 @@ storiesOf('bpk-component-map', module)
       zoomControl={false}
       width="600px"
       height={600}
-      language="zh"
+      language="zh-CN"
       centerLatitude={55.944357}
       centerLongitude={-3.1967116}
     >

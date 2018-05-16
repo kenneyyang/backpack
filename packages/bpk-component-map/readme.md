@@ -68,8 +68,14 @@ export default () => (
 | onDrag	        | func	    | false	    | null          |
 | onClick         | func      | false     | null          |
 
+Notes:
 the zoom, centerLatitude, centerLongitude is one method to load the map using the center point and zoom level
 the boundSouth,boundWest,boundNorth,boundEast is one method to load the map using bounding box 
+
+Language code list:
+https://www.w3schools.com/tags/ref_language_codes.asp
+Country (region) code list:
+https://www.w3schools.com/tags/ref_country_codes.asp
 
 ## BpkMapMarker Props
 
@@ -83,5 +89,4 @@ the boundSouth,boundWest,boundNorth,boundEast is one method to load the map usin
 | size			      | enum   		| false	    | regular         |
 | onMarkerClick	  | func			| false	    |                 |
 
-size enum:
-small, regular,large
+size enum: small, regular,large
